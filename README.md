@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Library Management System 📚
+
+A modern, role-based library management system built with Next.js, SQLite, and Drizzle ORM.
+
+## Features
+
+### For Students (Users)
+- **Browse Books** - Explore the library collection
+- **Borrow Books** - Check out available books (14-day loan period)
+- **Reserve Books** - Reserve books that are currently unavailable
+- **Suggest Books** - Request new books for the library
+- **Manage Fines** - View and pay overdue fines ($1 per day)
+
+### For Librarians
+- **Manage Books** - Add new books to the collection
+- **Process Borrowings** - View active loans and process returns
+- **Handle Fines** - System automatically creates fines for overdue books
+- **Review Suggestions** - Approve or reject student book suggestions
+- **Dashboard Overview** - View library statistics
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TailwindCSS 4
+- **Backend**: Next.js API Routes
+- **Database**: SQLite with Drizzle ORM
+- **Authentication**: NextAuth.js v5 with role-based access control
+- **Styling**: TailwindCSS with green color palette
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
 
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up the database:
+```bash
+npm run db:generate
+npm run db:migrate
+npm run db:seed
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Start the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## Demo Accounts
 
-To learn more about Next.js, take a look at the following resources:
+### Librarian Access
+- **Email**: librarian@library.com
+- **Password**: password123
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Student Access
+- **Email**: student@library.com
+- **Password**: password123
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   ├── dashboard/         # Dashboard pages
+│   │   ├── student/      # Student features
+│   │   └── librarian/    # Librarian features
+│   └── login/            # Login page
+├── components/            # Reusable React components
+├── db/                    # Database configuration
+│   ├── schema.ts         # Drizzle schema definitions
+│   ├── index.ts          # Database connection
+│   └── seed.ts           # Seed data script
+└── types/                # TypeScript type definitions
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Database Schema
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Tables
+- **users** - User accounts (students and librarians)
+- **books** - Library catalog
+- **borrowings** - Loan records
+- **reservations** - Book reservations
+- **fines** - Overdue fines
+- **suggestions** - Student book suggestions
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run db:generate` - Generate database migrations
+- `npm run db:migrate` - Run database migrations
+- `npm run db:seed` - Seed database with sample data
+- `npm run db:studio` - Open Drizzle Studio (database GUI)
+
+## Features in Detail
+
+### Authentication & Authorization
+- Role-based access control (Student vs Librarian)
+- Protected routes with middleware
+- Session management with NextAuth.js
+
+### Book Management
+- Add books with ISBN, category, and multiple copies
+- Track available vs total copies
+- Real-time availability updates
+
+### Borrowing System
+- 14-day loan period
+- Automatic availability tracking
+- Return processing with overdue detection
+
+### Fine Management
+- Automatic fine calculation ($1 per day overdue)
+- Payment processing
+- Fine history tracking
+
+### Reservation System
+- Reserve unavailable books
+- Track reservation status
+- Notification-ready infrastructure
+
+## Color Palette
+
+The system uses a green color scheme throughout:
+- Primary: Green-600 (`#059669`)
+- Background: Green-50 (`#f0fdf4`)
+- Hover: Green-700 (`#047857`)
+- Accents: Various green shades
+
+## Future Enhancements
+
+- Email notifications for due dates and reservations
+- Book ratings and reviews
+- Advanced search and filtering
+- Export reports (PDF/CSV)
+- Book categories management
+- Multi-library support
+- Mobile responsive improvements
+
+## License
+
+This project is open source and available under the MIT License.
